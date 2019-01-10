@@ -1,0 +1,43 @@
+Problem #2 
+
+Description : 
+You are given two non-empty linked lists representing two non-negative integers.
+The digits are stored in reverse order and each of their nodes contain a single digit.
+Add the two numbers and return it as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Example:
+
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+
+Solution: 
+Programming Language: C++ 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+   ListNode head(0), *pre ;   //creates an empty ListNode head and a pointer pre  
+ pre = &head ;     //pointing the pointer towards the head 
+        int carry = 0 ; 
+        while (((l1!=NULL)|| (l2!=NULL) ||carry)) 
+        {
+         int sum = (l1 ? l1->val : 0 )+ (l2 ? l2->val : 0) + carry ; 
+            carry = sum / 10 ; 
+            int value = sum % 10 ; 
+            pre->next = new ListNode(value) ;   //adding the value to a new ListNode whose pointer lies in next of the head
+            pre = pre -> next ;    //pointer pre points towards the newly ListNode now  
+            l1 = l1  ? l1->next : l1 ; 
+            l2 = l2 ? l2->next : l2 ; 
+        }
+        return head.next ; 
+    }
+};
