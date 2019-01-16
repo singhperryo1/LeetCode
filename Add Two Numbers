@@ -41,3 +41,55 @@ public:
         return head.next ; 
     }
 };
+
+Programming Language: Java 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+          ListNode head = new ListNode(0) ;   //creating a ListNode that contains 0 and he next field contains null  
+ ListNode AddressToHead = head ; // this ListNode AddressToHead basically contains the address of the head in the next field 
+        int carry = 0 ;              
+        while ((l1!=null)|| (l2!=null)) 
+        { 
+int sum = 0 ;     
+         if(l1==null)   //to avoind null pointer exception 
+ sum = sum + carry; 
+            else 
+ sum =  sum +  carry + l1.val ; 
+            if(l2==null)  //to avoind null pointer exception 
+sum = sum + 0 ; 
+            else 
+                sum = sum + l2.val ; 
+            carry = sum / 10 ;        //for calculating the carry 
+            int value = sum % 10 ;    //for calculating the actual sum 
+            AddressToHead.next = new ListNode(value) ;   //adding the sum (value) by creating a new ListNode 
+            AddressToHead = AddressToHead.next ;    //AddressToHead now conatins the address to the new ListNode created
+            
+            //for iteration purpose
+           if(l1!=null)      
+                l1 = l1.next ; 
+            else
+                l1 = null ; 
+           if(l2!=null)
+                l2 = l2.next ;
+            else
+                l2 = null ;
+            
+            //when the both the input list read their endpoint but thhere is still a carry left
+            if((l1==null)&&(l2==null)&&(carry!=0))  
+                
+            {
+                 AddressToHead.next = new ListNode(carry) ; //creates a new ListNode to add the carry to it  
+              AddressToHead = AddressToHead.next ;  //AddressToHead contains the address to the new ListNode created      
+        }
+        }
+        return head.next;   // the next field of the head contains the list  
+    }
+    }
